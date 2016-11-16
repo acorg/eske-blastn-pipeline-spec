@@ -58,4 +58,4 @@ Does a `make clean-1` and removes intermediate SLURM output log files.
 $ make clean-3
 ```
 
-Does a `make clean-1` and also removes the final output in `03-panel/out`.
+Does a `make clean-2` and also removes the final output in `03-panel/out`.
