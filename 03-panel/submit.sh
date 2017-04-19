@@ -14,24 +14,25 @@ log=../slurm-pipeline.log
 
 echo "03-panel started at `date`" >> $log
 
-json_option=
-fasta_option=
+json=
+fasta=
 for task in "$@"
 do
     echo "  task $task" >> $log
-    json_option="$json_option --json ../02-blastn/$task.json.bz2"
-    fasta_option="$fasta_option --fasta ../01-split/$task.fasta"
+    json="$json ../02-blastn/$task.json.bz2"
+    fasta="$fasta ../01-split/$task.fasta"
 done
 
 echo "  noninteractive-alignment-panel.py started at `date`" >> $log
 srun -n 1 noninteractive-alignment-panel.py \
-  $json_option \
-  $fasta_option \
+  --json $json \
+  --fasta $fasta \
   --matcher blast \
+  --checkAlphabet 0 \
   --outputDir out \
-  --withScoreBetterThan 40 \
-  --minMatchingReads 10 \
-  --minCoverage 0.1 > summary-virus
+  --withScoreBetterThan 60 \
+  --scoreCutoff 50 \
+  --minMatchingReads 5 > summary-virus
 echo "  noninteractive-alignment-panel.py stopped at `date`" >> $log
 
 echo "03-panel stopped at `date`" >> $log

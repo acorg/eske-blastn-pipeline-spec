@@ -1,4 +1,4 @@
-.PHONY: x, run, clean
+.PHONY: x, run, clean-1, clean-2, clean-3
 
 x:
 	@echo "There is no default make target. Use 'make run' to run the SLURM pipeline."

@@ -19,7 +19,7 @@ echo "  There are $prexistingCount pre-existing split files." >> $log
 
 function makeFasta () {
     echo "  FASTQ is" >> $log
-    ls -d1 ../../../*/Sample_ESW_*${sample}_*/03-find-unmapped/*-unmapped.fastq.gz >> $log
+    ls ../../../*/Sample_ESW_*${sample}_*/03-find-unmapped/*-unmapped.fastq.gz >> $log
 
     echo >> $log
 
@@ -28,7 +28,7 @@ function makeFasta () {
     # line in the output and that we need to split on an even number of
     # input FASTA lines.
     echo "  Uncompressing and splitting all FASTQ at `date`" >> $log
-    zcat `ls -d1 ../../../*/Sample_ESW_*${sample}_*/03-find-unmapped/*-unmapped.fastq.gz` |
+    zcat `ls ../../../*/Sample_ESW_*${sample}_*/03-find-unmapped/*-unmapped.fastq.gz` |
         convert-fastq-to-fasta.py | split -l 500000 -a 5 --additional-suffix=.fasta - chunk-
     echo "  FASTQ uncompressed at `date`" >> $log
     echo "  Split into `ls chunk-* | wc -l | awk '{print $1}'` files:" >> $log
@@ -45,8 +45,7 @@ then
             echo "  Pre-existing split files exist, but --force was used. Overwriting." >> $log
             makeFasta
         else
-            echo "  Will not overwrite pre-existing split files. Use --force to make me." >> $log
-            exit 1
+            echo "  Not overwriting pre-existing split files. Use --force to make me." >> $log
         fi
     else
         echo "  No pre-existing split files exists, making them." >> $log
