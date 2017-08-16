@@ -3,32 +3,32 @@
         {
             "cwd": "00-start",
             "name": "start",
-            "script": "00-start/start.sh"
+            "script": "start.sh"
         },
         {
             "cwd": "01-split",
             "dependencies": ["start"],
             "name": "split",
-            "script": "01-split/sbatch.sh"
+            "script": "sbatch.sh"
         },
         {
             "cwd": "02-blastn",
             "dependencies": ["split"],
             "name": "blastn",
-            "script": "02-blastn/sbatch.sh"
+            "script": "sbatch.sh"
         },
         {
             "collect": true,
             "cwd": "03-panel",
             "dependencies": ["blastn"],
             "name": "panel",
-            "script": "03-panel/sbatch.sh"
+            "script": "sbatch.sh"
         },
         {
             "cwd": "04-stop",
             "dependencies": ["panel"],
             "name": "stop",
-            "script": "04-stop/sbatch.sh"
+            "script": "sbatch.sh"
         }
     ]
 }
