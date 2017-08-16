@@ -29,7 +29,7 @@ function makeFasta () {
     # input FASTA lines.
     echo "  Uncompressing and splitting all FASTQ at `date`" >> $log
     zcat `ls ../../../*/Sample_ESW_*${sample}_*/03-find-unmapped/*-unmapped.fastq.gz` |
-        convert-fastq-to-fasta.py | split -l 500000 -a 5 --additional-suffix=.fasta - chunk-
+        filter-fasta.py --fastq --saveAs fasta | split -l 500000 -a 5 --additional-suffix=.fasta - chunk-
     echo "  FASTQ uncompressed at `date`" >> $log
     echo "  Split into `ls chunk-* | wc -l | awk '{print $1}'` files:" >> $log
     ls -l chunk-* >> $log
